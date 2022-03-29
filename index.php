@@ -6,6 +6,7 @@ use App\Controllers\LoginController;
 use App\Controllers\ApartmentController;
 use App\Controllers\BookingController;
 use App\Controllers\CommentController;
+use App\Controllers\ProductControllers;
 use App\View;
 use App\Redirect;
 use Carbon\Carbon;
@@ -38,6 +39,12 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/comments/save', [CommentController::class, 'save']);
     $r->addRoute('GET', '/comments', [CommentController::class, 'index']);
     $r->addRoute('GET', '/comments/{id:\d+}/delete', [CommentController::class, 'delete']);
+
+    // Products
+    $r->addRoute('GET', '/product', [ProductControllers::class, 'index']);
+    $r->addRoute('POST', '/product/add', [ProductControllers::class, 'add']);
+    $r->addRoute('GET', '/product/{id:\d+}/delete', [ProductControllers::class, 'delete']);
+    $r->addRoute('GET', '/product/{id:\d+}/buy', [ProductControllers::class, 'buy']);
 
 });
 
