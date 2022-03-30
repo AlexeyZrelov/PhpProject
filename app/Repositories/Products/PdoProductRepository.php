@@ -39,8 +39,6 @@ class PdoProductRepository implements ProductRepository
 
     public function confirm($name, $description, $price, $amount, $date, $id): void
     {
-//        $arrival = $_POST['arrival'] ?? null;
-//        $departure = $_POST['departure'] ?? null;
 
         $stmt = (new Dbh())->connect()->prepare('UPDATE products SET name=?, description=?, price=?, amount=?, date=? WHERE id=?');
 
