@@ -8,4 +8,5 @@ interface ProductRepository
     public function all(): array;
     public function deleteById(array $vars): void;
     public function buyId(array $vars): array;
+    public function confirm($name, $description, $price, $amount, $date, $id): void;
 }

@@ -40,7 +40,10 @@
     <div class="card-body">
         <!--        <h5 class="card-title">{{ result.name }}</h5>-->
         <p class="card-text">{{ result.description }}</p>
-        <p class="card-text"><small class="card-text">{{ result.date }}</small></p>
+        <p class="card-text">
+            <small class="card-text">Price:{{ result.price }}€&nbsp;&nbsp;x&nbsp;&nbsp;{{ result.amount }}</small>
+            <small class="card-text">&nbsp;&nbsp;&nbsp;&nbsp;Date:{{ result.date }}</small>
+        </p>
         <p class="card-text" style="display: flex">
             <a href="/product/{{ result.id }}/buy" class="btn btn-primary">Buy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/product/{{ result.id }}/delete" class="btn btn-danger">Delete</a>

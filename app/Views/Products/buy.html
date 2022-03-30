@@ -40,10 +40,27 @@
         <div class="card-body">
             <!--        <h5 class="card-title">{{ result.name }}</h5>-->
             <p class="card-text">{{ result.description }}</p>
-            <p class="card-text"><small class="card-text">{{ result.date }}</small></p>
+
+            <form action="/product/confirm" method="POST">
+
+            <p class="card-text">
+                <small class="card-text">Price:{{ result.price }}€&nbsp;&nbsp;x&nbsp;&nbsp;</small>
+                <input type="text" name="amount" value="{{ result.amount }}" />
+                <small class="card-text">&nbsp;&nbsp;&nbsp;&nbsp;Date:{{ result.date }}</small>
+            </p>
             <p class="card-text" style="display: flex">
-                <a href="/product" class="btn btn-primary">Ok</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                <a href="/product/{{ result.id }}/delete" class="btn btn-danger">Delete</a>-->
+                <a href="/product" class="btn btn-primary">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                <a href="/product/{{ result.id }}/confirm" class="btn btn-primary">Buy Now</a>-->
+
+                <input type="hidden" name="name" value="{{ result.name }}" />
+                <input type="hidden" name="description" value="{{ result.description }}" />
+                <input type="hidden" name="price" value="{{ result.price }}" />
+<!--                <input type="hidden" name="amount" value="{{ result.amount }}" />-->
+                <input type="hidden" name="date" value="{{ result.date }}" />
+                <input type="hidden" name="id" value="{{ result.id }}" />
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+
             </p>
         </div>
     </div>

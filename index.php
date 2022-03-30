@@ -7,6 +7,8 @@ use App\Controllers\ApartmentController;
 use App\Controllers\BookingController;
 use App\Controllers\CommentController;
 use App\Controllers\ProductControllers;
+use App\Repositories\Products\PdoProductRepository;
+use App\Repositories\Products\ProductRepository;
 use App\View;
 use App\Redirect;
 use Carbon\Carbon;
@@ -14,6 +16,17 @@ use \Twig\Environment;
 use \Twig\Loader\FilesystemLoader;
 
 require_once 'vendor/autoload.php';
+
+//session_start();
+
+$builder = new DI\ContainerBuilder();
+
+$builder->addDefinitions([
+    ProductRepository::class => DI\create(PdoProductRepository::class)
+]);
+
+$container = $builder->build();
+
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
@@ -45,6 +58,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/product/add', [ProductControllers::class, 'add']);
     $r->addRoute('GET', '/product/{id:\d+}/delete', [ProductControllers::class, 'delete']);
     $r->addRoute('GET', '/product/{id:\d+}/buy', [ProductControllers::class, 'buy']);
+    $r->addRoute('POST', '/product/confirm', [ProductControllers::class, 'confirm']);
 
 });
 
@@ -74,7 +88,8 @@ switch ($routeInfo[0]) {
         $method = $routeInfo[1][1];
 
         /** @var View $response */
-        $response = (new $controller)->$method($routeInfo[2]);
+//        $response = (new $controller)->$method($routeInfo[2]);
+        $response = ($container->get($controller))->$method($routeInfo[2]);
 
         $twig = new Environment(new FilesystemLoader('app/Views'));
 
